@@ -4,23 +4,19 @@
   box-sizing: border-box;
 }
 
-/* Navigation - start */
-
-.navbar-content {
-  background-color: #B7B7A4;
-  
+a {
+  color: #B8F2E6 !important;
 }
 
-.nav-logo {
-  text-decoration: none;
+.nav-wrapper {
+  background-color: #5E6472;
 }
 
-.logo img{
-  width: 100px;
-  transform: rotate(20deg);
-  opacity: .2;
+.brand-logo {
+  left: 10% !important;
 }
 
-.logo img:hover {
-  opacity: .7;
+.right {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
