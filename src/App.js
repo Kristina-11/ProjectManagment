@@ -1,7 +1,10 @@
+// Imports from Components
+const { default: Navbar } = require("./Components/Content/Nav");
+
 function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <Navbar />
     </div>
   );
 }
