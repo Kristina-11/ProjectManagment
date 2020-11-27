@@ -4,11 +4,12 @@
   box-sizing: border-box;
 }
 
+
 a {
   color: #B8F2E6 !important;
 }
 
-.nav-wrapper {
+.nav-wrapper, footer {
   background-color: #5E6472;
 }
 
@@ -20,3 +21,13 @@ a {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-text {
+  text-align: center;
+  color: #B8F2E6;
+}
