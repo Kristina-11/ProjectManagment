@@ -38,7 +38,7 @@ const SignUp = () => {
                 </div>
 
                 <div className="input-field">
-                    <button className="btn">Login</button>
+                    <button className="btn">Sign Up</button>
                 </div>
             </form>
         </div>
