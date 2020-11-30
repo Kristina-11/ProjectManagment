@@ -4,6 +4,9 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #f1fffe;
+}
 
 a {
   color: #B8F2E6 !important;
@@ -23,8 +26,23 @@ input[type="date"], input[type="text"] {
   padding: 20px;
 }
 
+.card {
+  border-radius: 30px !important;
+}
+
 .card-title {
   color: #ec968e;
+  font-weight: bold !important;
+}
+
+.date-on-page {
+  text-align: right !important;
+  color: #9e9e9e;
+}
+
+.nav-signedout, .nav-signedin {
+  display: grid;
+  grid-template-columns: auto auto auto;
 }
 
 .valid {
@@ -58,4 +76,10 @@ footer {
 .footer-text a {
   color: #B8F2E6;
   font-weight: bold;
+}
+
+@media screen and (max-width: 500px) {
+  .brand-logo {
+    transform: translateX(0) !important;
+  }
 }

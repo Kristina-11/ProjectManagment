@@ -1,6 +1,7 @@
 const ProjectDetails = (props) => {
-    console.log(props)
+
     const id = props.match.params.id;
+    
     return ( 
         <div className="container section project-details">
             <div className="card z-depth-0">
