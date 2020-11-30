@@ -19,7 +19,7 @@ const SignUp = () => {
                 <div className="input-field">
                     <label htmlFor="name">Name</label>
                     <input type="text" id="name" className="validate" value={name} onChange={(e) => setName(e.target.value)} />
-                    <span className="helper-text" data-error="You must a valid name" data-success=""></span>
+                    <span className="helper-text" data-error="You must enter a valid name" data-success=""></span>
                 </div>
                 <div className="input-field">
                     <label htmlFor="lastName">Last Name</label>

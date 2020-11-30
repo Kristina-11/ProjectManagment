@@ -1,3 +1,5 @@
+import Profile from "./Components/Content/Profile";
+
 // Imports from Components
 const { Switch, Route } = require("react-router-dom");
 const { default: SignIn } = require("./Components/Authentification/SignIn");
@@ -16,6 +18,7 @@ function App() {
         <Route path="/project/:id" component={ProjectDetails} />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/profile" component={Profile} />
       </Switch>
       <Footer />
     </div>
