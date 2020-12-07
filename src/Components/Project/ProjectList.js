@@ -1,12 +1,12 @@
 const { default: ProjectSummary } = require("./ProjectSummary")
 
-const ProjectList = () => {
+const ProjectList = ({ projects }) => {
+    console.log(projects)
     return (  
         <div className="project-list section">
-            <ProjectSummary />
-            <ProjectSummary />
-            <ProjectSummary />
-            <ProjectSummary />
+            { projects.map((pro) => {
+                return <ProjectSummary pro={pro} />
+            }) }
         </div>
     );
 }
