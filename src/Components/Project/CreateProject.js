@@ -12,7 +12,7 @@ const CreateProject = ({ createProject }) => {
         let obj = {
             title,
             content,
-            date
+            createdAt: date
         }
         createProject(obj);
     }

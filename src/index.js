@@ -10,28 +10,45 @@ import { applyMiddleware, createStore, compose } from 'redux';
 import rootReducer from './Store/Reducers/rootReducer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { reduxFirestore, getFirestore } from 'redux-firestore';
-import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
-import fbConfig from './config/fbConfig';
-
+import firebase from './config/fbConfig';
+import { reduxFirestore, getFirestore, createFirestoreInstance } from 'redux-firestore';
+import { reactReduxFirebase, getFirebase, ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import 'firebase/firestore';
 // In order to connect firestore and firebase to redux we need to use store enhancers
 // Connecting everything with combining several store enhancers with compose
+
+// react-redux-firebase config
+const rrfConfig = {
+  userProfile: 'projects',
+  useFirestoreForProfile: true
+}
 
 const store = createStore(
   rootReducer, 
   compose(
-      applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
-      reduxFirestore(fbConfig),
-      reactReduxFirebase(fbConfig)
+      applyMiddleware(
+        thunk.withExtraArgument({ getFirebase, getFirestore })
+        ),
+      reduxFirestore(firebase)
     )
   );
+
+  const rffProps = {
+    firebase,
+    useFirestoreForProfile: true,
+    config: rrfConfig,
+    dispatch: store.dispatch,
+    createFirestoreInstance
+}
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
+      <ReactReduxFirebaseProvider {...rffProps}>
+        <Router>
+          <App />
+        </Router>
+      </ReactReduxFirebaseProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
