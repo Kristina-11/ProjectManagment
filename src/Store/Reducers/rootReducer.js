@@ -8,7 +8,7 @@ const { default: projectReducer } = require("./projectReducer");
 const rootReducer = combineReducers({
     auth: authReducer,
     project: projectReducer,
-    firestore: firestoreReducer,
+    firestore: firestoreReducer, // Syncs data to a state
     firebase: firebaseReducer,
 });
 

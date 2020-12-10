@@ -35,6 +35,10 @@ input[type="date"], input[type="text"] {
   font-weight: bold !important;
 }
 
+.card-content p {
+  color:  #9e9e9e !important
+}
+
 .date-on-page {
   text-align: right !important;
   color: #9e9e9e;
@@ -76,6 +80,13 @@ footer {
 .footer-text a {
   color: #B8F2E6;
   font-weight: bold;
+}
+
+.loading {
+  padding: 2rem;
+  color: #9bf0df;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 @media screen and (max-width: 500px) {
