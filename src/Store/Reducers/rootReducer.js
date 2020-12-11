@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
     auth: authReducer,
     project: projectReducer,
     firestore: firestoreReducer, // Syncs data to a state
-    firebase: firebaseReducer,
+    firebase: firebaseReducer, // Auth syncing
 });
 
 export default rootReducer

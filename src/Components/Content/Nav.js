@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
 import sidenav from 'materialize-css'
+import { connect } from 'react-redux'
 
 const Navbar = () => {
 
@@ -25,5 +26,12 @@ const Navbar = () => {
         </nav>
      );
 }
+
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+
+    }
+}
  
-export default Navbar;
+export default connect(mapStateToProps)(Navbar)
