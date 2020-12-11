@@ -1,6 +1,11 @@
 import { useState } from 'react'
+import { connect } from 'react-redux';
+import { signIn } from '../../Store/Actions/authActions';
 
-const SignIn = () => {
+const SignIn = (props) => {
+
+    const { signIn } = props;
+    const { authError } = props;
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -8,7 +13,11 @@ const SignIn = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(email, password);
+        let obj = {
+            email,
+            password
+        }
+        signIn(obj);
     }
 
     return (
@@ -25,7 +34,9 @@ const SignIn = () => {
                     <input type="password" id="password" className="validate" value={password} onChange={(e) => setPassword(e.target.value)} />
                     <span className="helper-text" data-error="" data-success=""></span>
                 </div>
-
+                <div className="error">
+                    { authError ? <p className="red-text center">{authError}</p> : null }
+                </div>
                 <div className="input-field">
                     <button className="btn">Login</button>
                 </div>
@@ -33,5 +44,13 @@ const SignIn = () => {
         </div>
       );
 }
- 
-export default SignIn;
+
+export default connect((state) => {
+    return {
+        authError: state.auth.authError
+    }
+}, (dispatch) => {
+    return {
+        signIn: (cred) => dispatch(signIn(cred))
+    }
+})(SignIn)
