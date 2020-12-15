@@ -46,8 +46,10 @@ const SignIn = (props) => {
 }
 
 export default connect((state) => {
+    console.log(state)
     return {
-        authError: state.auth.authError
+        authError: state.auth.authError,
+        path: state.auth.path
     }
 }, (dispatch) => {
     return {

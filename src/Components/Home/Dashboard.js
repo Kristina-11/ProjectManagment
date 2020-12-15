@@ -1,18 +1,22 @@
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
+import { firestoreConnect, isLoaded } from "react-redux-firebase";
 import { compose } from "redux";
 
 const { default: ProjectList } = require("../Project/ProjectList")
 const { default: Notification } = require("./Notification")
 const { default: Theory } = require("./Theory")
 
-const Dashboard = ({ projects }) => {
+const Dashboard = (props) => {
+    const { projects } = props;
+    const { auth } = props;
+    
+    const section =  isLoaded(auth) && auth ? <ProjectList projects={projects} /> : <Theory />;
+
     return ( 
         <div className="dashboard container">
             <div className="row">
                 <div className="col s12 m8">
-                    <Theory />
-                    <ProjectList projects={projects} />
+                    { section }
                 </div>
                 <div className="col s12 m2 offset-m1">
                     <Notification />
@@ -22,11 +26,16 @@ const Dashboard = ({ projects }) => {
      );
 }
 
+const mapStateToProps = (state) => {
+    return {
+        projects: state.firestore.ordered.projects,
+        auth: state.firebase.auth.uid
+    }
+}
+
 export default compose(
     firestoreConnect([
         { collection: 'projects' }
     ]),
-    connect((state) => ({
-        projects: state.firestore.ordered.projects
-    }))
+    connect(mapStateToProps)
 )(Dashboard);
