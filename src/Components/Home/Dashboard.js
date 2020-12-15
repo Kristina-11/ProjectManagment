@@ -7,8 +7,7 @@ const { default: Notification } = require("./Notification")
 const { default: Theory } = require("./Theory")
 
 const Dashboard = (props) => {
-    const { projects } = props;
-    const { auth } = props;
+    const { projects, auth } = props;
     
     const section =  isLoaded(auth) && auth ? <ProjectList projects={projects} /> : <Theory />;
 

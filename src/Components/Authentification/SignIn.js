@@ -1,14 +1,17 @@
 import { useState } from 'react'
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { signIn } from '../../Store/Actions/authActions';
 
 const SignIn = (props) => {
 
     const { signIn } = props;
-    const { authError } = props;
+    const { authError, auth } = props;
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    if(auth) return <Redirect to='/' />
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -49,7 +52,7 @@ export default connect((state) => {
     console.log(state)
     return {
         authError: state.auth.authError,
-        path: state.auth.path
+        auth: state.firebase.auth.uid
     }
 }, (dispatch) => {
     return {

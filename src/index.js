@@ -8,11 +8,11 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { applyMiddleware, createStore, compose } from 'redux';
 import rootReducer from './Store/Reducers/rootReducer';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import thunk from 'redux-thunk';
 import firebase from './config/fbConfig';
 import { reduxFirestore, getFirestore, createFirestoreInstance } from 'redux-firestore';
-import { reactReduxFirebase, getFirebase, ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { reactReduxFirebase, getFirebase, ReactReduxFirebaseProvider, isLoaded } from 'react-redux-firebase';
 import 'firebase/firestore';
 // In order to connect firestore and firebase to redux we need to use store enhancers
 // Connecting everything with combining several store enhancers with compose
@@ -37,16 +37,27 @@ const store = createStore(
     useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
     config: rrfConfig,
     dispatch: store.dispatch,
-    createFirestoreInstance
+    createFirestoreInstance,
+    userProfile: 'users', // where profiles are stored in database
+    presence: 'presence', // where list of online users is stored in database
+    sessions: 'sessions'
+}
+
+function AuthIsLoaded({ children }) {
+  const auth = useSelector(state => state.firebase.auth)
+  if (!isLoaded(auth)) return <div className="container center loading">Loading...</div>;
+      return children
 }
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ReactReduxFirebaseProvider {...rffProps}>
-        <Router>
-          <App />
-        </Router>
+        <AuthIsLoaded>
+          <Router>
+            <App />
+          </Router>
+        </AuthIsLoaded>
       </ReactReduxFirebaseProvider>
     </Provider>
   </React.StrictMode>,

@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { connect } from "react-redux";
+import { Redirect } from 'react-router-dom';
 import { createProject } from '../../Store/Actions/projectActions';
 
-const CreateProject = ({ createProject }) => {
+const CreateProject = ({ createProject, auth }) => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [date, setDate] = useState('');
+
+    if (!auth) return <Redirect to='/' />
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -56,4 +59,8 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
  
-export default connect(null, mapDispatchToProps)(CreateProject);
+export default connect((state) => {
+    return {
+        auth: state.firebase.auth.uid
+    }
+}, mapDispatchToProps)(CreateProject);
