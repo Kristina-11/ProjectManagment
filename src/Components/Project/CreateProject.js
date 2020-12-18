@@ -17,7 +17,7 @@ const CreateProject = (props) => {
         let obj = {
             title,
             content,
-            createdAt: date
+            due: date
         }
         createProject(obj);
         properties.history.push('/');
