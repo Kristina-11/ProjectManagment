@@ -49,7 +49,6 @@ const SignIn = (props) => {
 }
 
 export default connect((state) => {
-    console.log(state)
     return {
         authError: state.auth.authError,
         auth: state.firebase.auth.uid
