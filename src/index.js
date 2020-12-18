@@ -9,36 +9,56 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { applyMiddleware, createStore, compose } from 'redux';
 import rootReducer from './Store/Reducers/rootReducer';
 import { Provider, useSelector } from 'react-redux';
-import thunk from 'redux-thunk';
-import firebase from './config/fbConfig';
-import { reduxFirestore, getFirestore, createFirestoreInstance } from 'redux-firestore';
+import { reduxFirestore, createFirestoreInstance, getFirestore } from 'redux-firestore';
 import { reactReduxFirebase, getFirebase, ReactReduxFirebaseProvider, isLoaded } from 'react-redux-firebase';
-import 'firebase/firestore';
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
+import 'firebase/analytics'
+
+const ReduxThunk = require('redux-thunk').default;
 // In order to connect firestore and firebase to redux we need to use store enhancers
 // Connecting everything with combining several store enhancers with compose
+// Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyCA1S3T4WyaocEBiQV73rmiGEPQhuRrnGo",
+    authDomain: "projectmanagment-28660.firebaseapp.com",
+    projectId: "projectmanagment-28660",
+    storageBucket: "projectmanagment-28660.appspot.com",
+    messagingSenderId: "49901905721",
+    appId: "1:49901905721:web:201cf897f96fb6729d2ae8",
+    measurementId: "G-MX4BZ2GCKX"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.firestore().settings({ timestampsInSnapshots: true });
+  firebase.analytics();
 
 // react-redux-firebase config
 const rrfConfig = {
-  userProfile: 'projects'
+  userProfile: 'users',
+  useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
+  enableRedirectHandling: false,
+  resetBeforeLogin: false
 }
 
 const store = createStore(
   rootReducer, 
   compose(
       applyMiddleware(
-        thunk.withExtraArgument({ getFirebase, getFirestore })
+        ReduxThunk.withExtraArgument({ getFirebase, getFirestore })
         ),
-      reduxFirestore(firebase)
+      reduxFirestore(firebase, firebaseConfig)
     )
   );
 
   const rffProps = {
     firebase,
-    useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
     config: rrfConfig,
     dispatch: store.dispatch,
     createFirestoreInstance,
-    userProfile: 'users', // where profiles are stored in database
+    attachAuthIsReady: true,
     presence: 'presence', // where list of online users is stored in database
     sessions: 'sessions'
 }
@@ -52,7 +72,7 @@ function AuthIsLoaded({ children }) {
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ReactReduxFirebaseProvider {...rffProps}>
+      <ReactReduxFirebaseProvider {...rffProps} >
         <AuthIsLoaded>
           <Router>
             <App />
