@@ -9,7 +9,6 @@ import { connect } from 'react-redux'
 import { isLoaded } from "react-redux-firebase";
 
 const Navbar = (props) => {
-
     const { auth } = props;
     const links = isLoaded(auth) && auth ? <SignedInLinks /> : <SignedOutLinks />;
 

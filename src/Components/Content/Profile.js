@@ -1,9 +1,10 @@
 const { default: CreateProject } = require("../Project/CreateProject")
 
-const Profile = () => {
+const Profile = (props) => {
     return ( 
         <div className="container">
-            <CreateProject />
+            <CreateProject properties={props} />
+            {/* Just logged in users tasks and options for editing and deleting */}
         </div>
      );
 }

@@ -37,8 +37,8 @@ const ReduxThunk = require('redux-thunk').default;
 
 // react-redux-firebase config
 const rrfConfig = {
-  userProfile: 'users',
-  useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
+  userProfile: 'users', // this
+  useFirestoreForProfile: true, // and this are used for gathering users info from firebase and firestore
   enableRedirectHandling: false,
   resetBeforeLogin: false
 }
@@ -58,10 +58,8 @@ const store = createStore(
     config: rrfConfig,
     dispatch: store.dispatch,
     createFirestoreInstance,
-    attachAuthIsReady: true,
-    presence: 'presence', // where list of online users is stored in database
-    sessions: 'sessions'
-}
+    attachAuthIsReady: true
+  }
 
 function AuthIsLoaded({ children }) {
   const auth = useSelector(state => state.firebase.auth)

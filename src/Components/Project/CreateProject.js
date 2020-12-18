@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { Redirect } from 'react-router-dom';
 import { createProject } from '../../Store/Actions/projectActions';
 
-const CreateProject = ({ createProject, auth }) => {
+const CreateProject = (props) => {
+    const { createProject, auth, properties } = props;
+    
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [date, setDate] = useState('');
@@ -18,6 +20,7 @@ const CreateProject = ({ createProject, auth }) => {
             createdAt: date
         }
         createProject(obj);
+        properties.history.push('/');
     }
 
     return ( 
