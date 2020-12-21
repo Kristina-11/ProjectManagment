@@ -14,11 +14,8 @@ const Dashboard = (props) => {
     return ( 
         <div className="dashboard container">
             <div className="row">
-                <div className="col s12 m8">
+                <div className="col s12">
                     { section }
-                </div>
-                <div className="col s12 m2 offset-m1">
-                    <Notification />
                 </div>
             </div>
         </div>
@@ -34,7 +31,7 @@ const mapStateToProps = (state) => {
 
 export default compose(
     firestoreConnect([
-        { collection: 'projects' }
+        { collection: 'projects', orderBy: ['createdAt', 'desc'] }
     ]),
     connect(mapStateToProps)
 )(Dashboard);

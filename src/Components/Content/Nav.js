@@ -12,18 +12,15 @@ const Navbar = (props) => {
     const { auth } = props;
     const links = isLoaded(auth) && auth ? <SignedInLinks /> : <SignedOutLinks />;
 
-    useEffect(() => {
-        let mobileNav = document.querySelectorAll('.sidenav');
-        sidenav.Sidenav.init(mobileNav);
-    })
-
     return ( 
         <nav className="nav-wrapper">
-            <div className="container">
-                <Link to='/' className='brand-logo'>
-                    Managment
-                </Link>
-                { links }
+            <div className="row">
+                <div className="col s12">
+                    <Link to='/' className='logo'>
+                        Managment
+                    </Link>
+                    { links }
+                </div>
             </div>
         </nav>
      );
