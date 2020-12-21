@@ -24,11 +24,10 @@ const CreateProject = (props) => {
     }
 
     return ( 
-        <div className="container col s1">
+        <div className="container">
             <div className="row">
                 <div className="col s12">
                     <form onSubmit={handleSubmit}>
-                        <h2>Create project</h2>
                         <div className="input-field">
                             <label htmlFor="title">Title</label>
                             <input type="text" id="title" className="validate" value={title} onChange={(e) => setTitle(e.target.value)} required/>

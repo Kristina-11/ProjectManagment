@@ -3,13 +3,17 @@ import { firestoreConnect, isLoaded } from "react-redux-firebase";
 import { compose } from "redux";
 
 const { default: ProjectList } = require("../Project/ProjectList")
-const { default: Notification } = require("./Notification")
 const { default: Theory } = require("./Theory")
 
 const Dashboard = (props) => {
     const { projects, auth } = props;
     
-    const section =  isLoaded(auth) && auth ? <ProjectList projects={projects} /> : <Theory />;
+    const section =  isLoaded(auth) && auth ? (
+        <div>
+            <h2>All projects</h2>
+            <ProjectList projects={projects} />
+        </div> ) : 
+        <Theory />;
 
     return ( 
         <div className="dashboard container">
