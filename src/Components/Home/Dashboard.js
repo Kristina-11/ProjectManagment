@@ -11,7 +11,7 @@ const Dashboard = (props) => {
     const section =  isLoaded(auth) && auth ? (
         <div>
             <h2>All projects</h2>
-            <ProjectList projects={projects} />
+            <ProjectList projects={projects} auth={auth} />
         </div> ) : 
         <Theory />;
 

@@ -7,7 +7,7 @@ import ProjectList from "../Project/ProjectList";
 const { default: CreateProject } = require("../Project/CreateProject")
 
 const Profile = (props) => {
-    const { filtered } = props;
+    const { filtered, auth } = props;
 
     const showForm = () => {
         const createProject = document.querySelector('.create');
@@ -38,7 +38,7 @@ const Profile = (props) => {
                     </div>
                 </div>
                 <div className="col s12">
-                    <ProjectList projects={filtered} />
+                    <ProjectList filtered={filtered} />
                 </div>
             </div>
         </div>
