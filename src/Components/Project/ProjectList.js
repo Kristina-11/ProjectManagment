@@ -8,7 +8,7 @@ const ProjectList = ({ projects, filtered }) => {
     const firestore = getFirestore();
 
     const [message, setMessage] = useState('');
-    //console.log(filtered)
+    
     const deleteIt = (id) => {
         firestore.collection('projects').doc(id).delete()
         .then(

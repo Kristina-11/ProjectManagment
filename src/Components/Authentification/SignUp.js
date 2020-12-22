@@ -15,7 +15,7 @@ const SignUp = (props) => {
 
     const [message, setMessage] = useState('');
     
-    if(auth) return <Redirect to='/' />
+    if(auth) return <Redirect to='/profile' />
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -35,7 +35,7 @@ const SignUp = (props) => {
                     setMessage(err.message);
               });
           } catch (error) {
-            console.log(error);
+            setMessage(error);
           }
     }
 
